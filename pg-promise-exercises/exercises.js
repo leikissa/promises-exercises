@@ -83,7 +83,7 @@ firstTenBooks.then(books => {
 
 */
 
-let findAuthorsOrderedByLastName = db.any('select * from authors order by last_name');; 
+let findAuthorsOrderedByLastName = db.any('select * from authors order by last_name');;
 findAuthorsOrderedByLastName.then(authors => {
   assert.deepEqual(authors.length, 19)
   assert.deepEqual(authors[0].last_name, 'Alcott')
@@ -128,7 +128,13 @@ findAuthorsOrderedByLastName.then(authors => {
    {first_name: 'Theodor Seuss', last_name: 'Geisel', title: 'Bartholomew and the Oobleck'}
    {first_name: 'Theodor Seuss', last_name: 'Geisel', title: 'The Cat in the Hat'}]
 */
-let findBookAuthors; // IMPLEMENT THIS FUNCTION
+let findBookAuthors= db.any('select first_name, last_name, title from authors a INNER JOIN books b on a.sid = b.author_id ');;
+findBookAuthors.then(bookAuthors => {
+  assert.deepEqual(bookAuthors.length, 15)
+  assert.deepEqual(bookAuthors.find(data => data.last_name === 'Worsley').title, 'Practical PostgreSQL')
+}).catch(error => {
+  console.log('Whoops, my function doesnt behave as expected.', error);
+});
 
 /* --------End of Exercise 4---------------- */
 
