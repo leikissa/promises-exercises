@@ -55,7 +55,7 @@ allBooks.then(books => {
 
 */
 
-let firstTenBooks = db.any('select title from books limit 10'); // = .... IMPLEMENT THIS FUNCTION
+let firstTenBooks = db.any('select title from books limit 10');
 firstTenBooks.then(books => {
   assert(books.length, 10)
 }).catch(error => {
@@ -83,7 +83,7 @@ firstTenBooks.then(books => {
 
 */
 
-let findAuthorsOrderedByLastName; // = .... IMPLEMENT THIS FUNCTION
+let findAuthorsOrderedByLastName = db.any('select * from authors order by last_name');; 
 findAuthorsOrderedByLastName.then(authors => {
   assert.deepEqual(authors.length, 19)
   assert.deepEqual(authors[0].last_name, 'Alcott')
